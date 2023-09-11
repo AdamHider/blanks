@@ -1,0 +1,6 @@
+{
+    "require": {
+        "php-ai/php-ml": "*",
+        "rubix/ml": "*"
+    }
+}

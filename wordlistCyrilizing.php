@@ -7,10 +7,11 @@ function init(){
     compileList();
 }
 function compileList(){  
+    ini_set('memory_limit', '1500M'); 
     $counter_file = 'counter.txt';
     $counter = file_get_contents($counter_file);
 
-    $filename = 'wordlists_tagged_cyr/wordlist_cyr_'.$counter.'.csv';
+    $filename = 'wordlists_tagged_cyr/wordlist_'.$counter.'.csv';
     $source = 'wordlists_tagged/wordlist_'.$counter.'.csv';
     /*
     $counter_file = 'components/com_lugat_editor/models/counter.txt';
