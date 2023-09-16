@@ -3,7 +3,7 @@ $mysqli = new mysqli("127.0.0.1:3307","root","","lugat_db");
 
 echo "This is a translator model";
 
-$sentence = "Şimdi bunı yapam";
+$sentence = "Şimdi yapa";
 
 $tokenList = tokenize($sentence);
 
@@ -37,7 +37,7 @@ function predict($tokenList)
     $predictionNormalized = predictionNormalize($predictionList);
 
 
-    return $result;
+    return $predictionNormalized;
 }
 function predictionNormalize($predictionList)
 {
@@ -60,7 +60,7 @@ function dbPredictToken($token, $position)
     global $mysqli;
     $sql = "
         SELECT t1.token, t1.position
-        FROM lugat_db.lgt_example_relation_test t JOIN lugat_db.lgt_example_relation_test t1 ON t.group_id = t1.group_id and t.token != t1.token 
+        FROM lugat_db.lgt_example_relation_test t JOIN lugat_db.lgt_example_relation_test t1 ON t.relation_id = t1.relation_id and t.token != t1.token 
         WHERE t.token = '$token'
         GROUP BY t1.coords ORDER BY abs(t.position - $position)
     ";
