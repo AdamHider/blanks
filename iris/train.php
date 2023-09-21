@@ -44,13 +44,11 @@ $logger->info('Making predictions');
 
 $predictions = $estimator->predict($testing);
 
-$probabilities = $estimator->proba($testing);
-print_r($predictions);
-die;
+$probabilities = $estimator->proba($training);
 
 $metric = new ProbabilisticAccuracy;
 
-$score = $metric->score($probabilities, $testing->labels());
+$score = $metric->score($probabilities, $training->labels());
 
 $logger->info("Accuracy is $score");
 
