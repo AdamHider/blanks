@@ -6,18 +6,19 @@ function init(){
   splitIntoDocs();
 }
 function splitIntoDocs(){  
+  set_time_limit(9000000000);
   ini_set('memory_limit', '1500M'); 
   $counter_file = 'counter.txt';
   $counter = file_get_contents($counter_file);
 
   $filename = 'docs/'.$counter.'.txt';
-  $source = 'ru.vert';
-  $language_id = 2;
+  $source = 'W:/SketchVerticals/en.vert';
+  $language_id = 4;
   $sourceData = file_get_contents($source);
   $sourceDocs = explode('</doc>', $sourceData);
   array_pop($sourceDocs);
   foreach($sourceDocs as $doc){
-    preg_match('/Title=".*"/u', $doc, $docHeading);
+    preg_match('/title=".*"/u', $doc, $docHeading);
     $docHeadingAttributes = explode('" ', $docHeading[0]);
     $result = [];
     $docCridentials = [
@@ -28,7 +29,6 @@ function splitIntoDocs(){
     ];
     preg_match('/<s.*\/s>/su', $doc, $docContent);
     $sentences = explode('<s>', str_replace("\n", ' ', str_replace("</s>", '', $docContent[0])));
-    array_shift($sentences);
     $book_id = insertBook($docCridentials);
     foreach($sentences as $index => $sentence){
       $sentenceCridentials = [
